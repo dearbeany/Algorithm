@@ -11,7 +11,8 @@ public class _1316_그룹단어체커 {
 		int cnt = 0; // 그룹단어가 아닌 단어의 개수
 
 		for (int i = 0; i < N; i++) {
-			String str = sc.nextLine();
+			String str = sc.nextLine(); // 단어 입력
+
 			boolean isCounted = false;
 			for (int j = 0; j < str.length() - 1; j++) {
 				if (isCounted) {

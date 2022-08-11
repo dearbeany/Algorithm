@@ -1,5 +1,6 @@
 package boj;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class _2204_도비의난독증 {
@@ -18,18 +19,20 @@ public class _2204_도비의난독증 {
 				str[i] = sc.nextLine();
 			}
 
-			// string to char array
-			// arr[0] = [c,a,t]
-			// arr[1] = [f,a,t]
+			String[] arr1 = new String[n]; // 원본 리스트
+			String[] arr2 = new String[n]; // 정렬용 리스트
 
-			for (String s : str) {
-				s = s.toLowerCase(); // 모두 소문자로 만들어줌
+			for (int i = 0; i < n; i++) {
+				arr1[i] = str[i];
+				arr2[i] = str[i].toLowerCase();
 			}
 
-			// 단어 중 최고의 길이(20)
-			char[] sorted = new char[20];
+			Arrays.sort(arr2);
 
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < n; i++) {
+				if (arr1[i].toLowerCase().equals(arr2[0])) {
+					System.out.println(arr1[i]);
+				}
 			}
 
 		} while (n != 0); // 0을 입력하면 종료
