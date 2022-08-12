@@ -3,7 +3,7 @@ package boj;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class _2204_도비의난독증 {
+public class _2204_도비의난독증_배열정렬 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 

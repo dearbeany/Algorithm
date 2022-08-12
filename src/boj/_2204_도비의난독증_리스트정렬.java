@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class _2204_도비의난독증2 {
+public class _2204_도비의난독증_리스트정렬 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
