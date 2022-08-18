@@ -1,4 +1,4 @@
-package boj;
+package boj.bronze;
 import java.util.Scanner;
 
 public class _1297_TV크기_2 {

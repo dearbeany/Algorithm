@@ -1,4 +1,4 @@
-package boj;
+package boj.bronze;
 
 /*
  * 1. 도화지를 모두 0으로 세팅한 후

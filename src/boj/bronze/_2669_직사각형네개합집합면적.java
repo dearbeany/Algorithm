@@ -1,4 +1,4 @@
-package boj;
+package boj.bronze;
 
 import java.io.IOException;
 import java.util.Scanner;

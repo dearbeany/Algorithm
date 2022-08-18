@@ -1,4 +1,4 @@
-package boj;
+package boj.silver;
 
 /*
  * 1. 이차원 배열을 탐색하면서 0에서 1로 1에서 0으로 바뀌는 순간이 둘레다

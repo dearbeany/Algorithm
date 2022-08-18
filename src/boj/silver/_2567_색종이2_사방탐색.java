@@ -1,4 +1,4 @@
-package boj;
+package boj.silver;
 
 /*
  * 1. 이차원배열을 사방탐색 하면서 둘레를 찾는다.

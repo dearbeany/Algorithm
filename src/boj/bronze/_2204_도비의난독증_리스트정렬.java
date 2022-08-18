@@ -1,4 +1,4 @@
-package boj;
+package boj.bronze;
 
 import java.util.ArrayList;
 import java.util.Collections;

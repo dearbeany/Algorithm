@@ -1,4 +1,4 @@
-package boj;
+package boj.bronze;
 
 import java.util.HashSet;
 import java.util.Scanner;

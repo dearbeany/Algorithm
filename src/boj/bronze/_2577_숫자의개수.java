@@ -1,4 +1,4 @@
-package boj;
+package boj.bronze;
 import java.util.Scanner;
 
 public class _2577_숫자의개수 {
