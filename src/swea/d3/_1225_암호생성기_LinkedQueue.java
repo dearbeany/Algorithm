@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class _1225_암호생성기_LinkedQueue {
+	// 내부클래스로 작성할 것
 	static class Node {
 		int data;
 		Node link;
