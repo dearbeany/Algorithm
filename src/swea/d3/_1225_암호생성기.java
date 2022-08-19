@@ -15,8 +15,7 @@ public class _1225_암호생성기 {
 		int T = 10;
 
 		for (int tc = 1; tc <= T; tc++) {
-			st = new StringTokenizer(br.readLine());
-			Integer.parseInt(st.nextToken()); // 테스트케이스 번호 tc
+			Integer.parseInt(br.readLine()); // 테스트케이스 번호 tc
 
 			st = new StringTokenizer(br.readLine());
 			Queue<Integer> q = new LinkedList<>();

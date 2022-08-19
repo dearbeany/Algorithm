@@ -20,15 +20,14 @@ public class _10158_개미 {
 		st = new StringTokenizer(br.readLine());
 		int t = Integer.parseInt(st.nextToken()); // t시간 후
 
-		// 1사분면, 2사분면, 3사분면, 4사분면 이동
-		int[] dx = { 1, -1, -1, 1 };
-		int[] dy = { 1, 1, -1, -1 };
+		// x를 2w만큼 이동하면 다시 제자리로 돌아옴
+		// 현재위치 x에 t만큼 이동한 다음 제자리로 오는 만큼 나눌때 나머지가 최종거리
+		x = (x + t) % 2 * w;
+		y = (y + t) % 2 * h;
 
-		/*
-		 * for (int i = 0; i < t; i++) { int nx = x, ny = y; for (int j = 0; j < 4; j++)
-		 * {
-		 * 
-		 * } }
-		 */
+		if (x >= w) {
+			System.out.println();
+		}
+
 	}
 }
