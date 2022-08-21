@@ -21,7 +21,7 @@ public class _2798_블랙잭_2 {
 			for (int j = i + 1; j < N; j++) {
 				for (int k = j + 1; k < N; k++) {
 					sum = arr[i] + arr[j] + arr[k];
-//					System.out.println(i + " " + j + " " + k);
+					System.out.println(i + " " + j + " " + k);
 					if (sum <= M) { // M 이하인 sum 중에서
 						max = Math.max(sum, max); // sum 중 최대의 값
 					}
