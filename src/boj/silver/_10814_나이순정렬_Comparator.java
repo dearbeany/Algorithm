@@ -11,6 +11,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/*
+ * 1. 나이 순 정렬은 
+ * - (1) Comparable를 implements, age를 기준으로 compareTo()를 오버라이드
+ * - (2) Collections.sort()의 두번째 인자인 Comparator의 compare()를 오버라이드
+ * 2. 입력 순 = 가입 순이기에, 입력한 순서대로 리스트에 추가한다. 
+ */
+
 public class _10814_나이순정렬_Comparator {
 	static class Member {
 		int age;
