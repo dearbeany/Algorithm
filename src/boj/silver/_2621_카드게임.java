@@ -23,19 +23,13 @@ public class _2621_카드게임 {
 
 		@Override
 		public int compareTo(Card o) {
-			// TODO Auto-generated method stub
 			return o.num - this.num; // 내림차순 정렬
-		}
-
-		@Override
-		public String toString() {
-			return "Card [color=" + color + ", num=" + num + "]";
 		}
 
 	}
 
 	static List<Card> list = new ArrayList<>(); // 카드를 담는 리스트
-	static int[] counts = new int[10]; // 인덱스 == 카드의 num. 같은 숫자의 개수를 담는 배열
+	static int[] counts = new int[10]; // 인덱스 == 카드의 num임. 즉, 같은 숫자의 개수를 담는 배열
 	static int result = Integer.MIN_VALUE;
 
 	public static void main(String[] args) throws IOException {
@@ -57,15 +51,15 @@ public class _2621_카드게임 {
 		}
 		Collections.sort(list); // 내림차순 정렬
 
-		// 1. 색 모두 같음, 숫자 연속적 -> max숫자 + 900
-		// 2. 숫자 4장 같음 -> 같은 점수 + 800
-		// 3. 숫자 3장 같음, 숫자 2장 같음 -> 3장 숫자*10 + 2장 숫자 + 700
-		// 4. 색 모두 같음 -> max숫자 + 600
-		// 5. 숫자 연속적 -> max숫자 + 500
-		// 6. 숫자 3장 같음 -> 같은 점수 + 400
-		// 7. 숫자 2장 같음, 숫자 2장 같음 -> 같은 숫자 중 max * 10 + 남은 같은 숫자 + 300
-		// 8. 숫자 2장 같음 -> 같은 숫자 + 200
-		// 9. 모두 해당되지 X -> max숫자 + 100
+		// (1) 색 모두 같음, 숫자 연속적 -> max숫자 + 900
+		// (2) 숫자 4장 같음 -> 같은 점수 + 800
+		// (3) 숫자 3장 같음, 숫자 2장 같음 -> 3장 숫자*10 + 2장 숫자 + 700
+		// (4) 색 모두 같음 -> max숫자 + 600
+		// (5) 숫자 연속적 -> max숫자 + 500
+		// (6) 숫자 3장 같음 -> 같은 점수 + 400
+		// (7) 숫자 2장 같음, 숫자 2장 같음 -> 같은 숫자 중 max * 10 + 남은 같은 숫자 + 300
+		// (8) 숫자 2장 같음 -> 같은 숫자 + 200
+		// (9) 모두 해당되지 X -> max숫자 + 100
 
 		if (isSameColor()) {
 			if (isContinuous()) {
@@ -186,10 +180,6 @@ public class _2621_카드게임 {
 				cnt++;
 			}
 		}
-		if (cnt == 5) {
-			return true;
-		} else {
-			return false;
-		}
+		return (cnt == 5 ? true : false);
 	}
 }
