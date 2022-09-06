@@ -11,6 +11,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/*
+- (1) Comparable를 implements, num을 기준으로 compareTo()를 오버라이드
+- (2) Collections.sort()의 두번째 인자인 Comparator의 compare()를 오버라이드
+*/
+
+/*
+ * 1. 리스트는 원소로 Card를 가진다. 
+ * 2. Comparable를 implements, num을 기준으로 compareTo()를 오버라이드하여 내림차순 정렬하였다.
+ * 3. 다음과 같은 함수를 이용하여 조건에 따른 결과를 출력하였다.
+ * 
+ * - isSameColor() : 5장의 카드의 색상이 모두 같은지
+ * - isSameNumCount(num) : 같은 숫자를 가진 카드가 num 개수만큼 있다 
+ * - isSameNumPerTwo() : 같은 숫자를 가진 카드가 각각 2장씩 있다
+ * - isContinuous() : 5장의 카드의 숫자가 모두 연속적인지
+ */
+
 public class _2621_카드게임 {
 	static class Card implements Comparable<Card> {
 		char color;
@@ -24,6 +40,7 @@ public class _2621_카드게임 {
 		@Override
 		public int compareTo(Card o) {
 			return o.num - this.num; // 내림차순 정렬
+//			return this.num - o.num; // 오름차순 정렬
 		}
 
 	}
@@ -49,17 +66,18 @@ public class _2621_카드게임 {
 			Card card = new Card(color, num);
 			list.add(card);
 		}
+
 		Collections.sort(list); // 내림차순 정렬
 
-		// (1) 색 모두 같음, 숫자 연속적 -> max숫자 + 900
-		// (2) 숫자 4장 같음 -> 같은 점수 + 800
-		// (3) 숫자 3장 같음, 숫자 2장 같음 -> 3장 숫자*10 + 2장 숫자 + 700
-		// (4) 색 모두 같음 -> max숫자 + 600
-		// (5) 숫자 연속적 -> max숫자 + 500
-		// (6) 숫자 3장 같음 -> 같은 점수 + 400
-		// (7) 숫자 2장 같음, 숫자 2장 같음 -> 같은 숫자 중 max * 10 + 남은 같은 숫자 + 300
-		// (8) 숫자 2장 같음 -> 같은 숫자 + 200
-		// (9) 모두 해당되지 X -> max숫자 + 100
+//		 (1) 색 모두 같음, 숫자 연속적 -> max숫자 + 900
+//		 (2) 숫자 4장 같음 -> 같은 점수 + 800
+//		 (3) 숫자 3장 같음, 숫자 2장 같음 -> 3장 숫자*10 + 2장 숫자 + 700
+//		 (4) 색 모두 같음 -> max숫자 + 600
+//		 (5) 숫자 연속적 -> max숫자 + 500
+//		 (6) 숫자 3장 같음 -> 같은 점수 + 400
+//		 (7) 숫자 2장 같음, 숫자 2장 같음 -> 같은 숫자 중 max * 10 + 남은 같은 숫자 + 300
+//		 (8) 숫자 2장 같음 -> 같은 숫자 + 200
+//		 (9) 모두 해당되지 X -> max숫자 + 100
 
 		if (isSameColor()) {
 			if (isContinuous()) {

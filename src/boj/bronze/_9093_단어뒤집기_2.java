@@ -14,11 +14,11 @@ public class _9093_단어뒤집기_2 {
 		int T = Integer.parseInt(br.readLine());
 
 		for (int tc = 0; tc < T; tc++) {
-			String[] wordList = br.readLine().split(" ");
+			String[] wordList = br.readLine().split(" "); // 공백을 기준으로 스플릿해서 배열에 넣음
 
 			for (String s : wordList) {
 				StringBuilder sb = new StringBuilder(s);
-				bw.write(sb.reverse().append(' ').toString());
+				bw.write(sb.reverse().append(' ').toString()); // 스트링 원소 하나씩 reverse한다음 출력
 			}
 			bw.newLine();
 		}
