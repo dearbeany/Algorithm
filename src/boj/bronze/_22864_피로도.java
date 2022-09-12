@@ -12,16 +12,6 @@ public class _22864_피로도 {
 		// 피로도 <= M 하루 24시간
 		// 최대 얼마나 일을 할 수 있는가
 
-		// A B C M
-		// 5 3 2 0
-		// 1시간 일하면 피로도 +5 일 +3
-		// 1시간 쉬면 피로도 -2
-
-		// 1시간 일하면 적어도 3시간 쉬어야 함.
-		// A + C = 24
-		// 5A - 2C <= M
-		// 일은 3A
-
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -32,5 +22,21 @@ public class _22864_피로도 {
 
 		int workAmount = 0; // 처리한 일의 양
 		int hour = 24; // 하루 시간
+		int fatigue = 0; // 피로도
+
+		while (hour != 0) {
+			if (fatigue + A <= M) { // 1시간 일한 피로도가 한계 이하일 경우에만
+				fatigue += A; // 피로도 증가
+				workAmount += B; // 처리한 일의 양 증가
+			} else {
+				if (fatigue - C < 0) { // 피로도 < 0이면
+					fatigue = 0; // 0으로 세팅
+				} else {
+					fatigue -= C; // 아닌 경우 쉬니깐 피로도 빼줌
+				}
+			}
+			hour--;
+		}
+		System.out.println(workAmount);
 	}
 }
