@@ -98,7 +98,7 @@ public class _1969_DNA {
 				resDNA[i] = 'C';
 			} else if (max == tmp[2]) {
 				resDNA[i] = 'G';
-			} else {
+			} else if (max == tmp[3]) {
 				resDNA[i] = 'T';
 			}
 

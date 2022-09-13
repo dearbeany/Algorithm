@@ -68,7 +68,7 @@ public class _2422_한윤정아이스크림 {
 			for (int j = i + 1; j < N + 1; j++) {
 				// 2개를 먼저 뽑아서 조합이 true면
 				if (iceComb[i][j]) {
-//					System.out.println(i + "," + j);
+					System.out.println(i + "," + j);
 
 					// 1개를 추가로 뽑는다
 					for (int k = j + 1; k < N + 1; k++) {
@@ -85,6 +85,5 @@ public class _2422_한윤정아이스크림 {
 		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
-
 	}
 }
