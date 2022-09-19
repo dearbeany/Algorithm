@@ -31,11 +31,14 @@ public class _5215_햄버거다이어트_비트마스킹 {
 			int res = 0; // 가장 scoreSum 높은 조합의 햄버거 점수
 			int scoreSum, kcalSum; // 점수조합, 칼로리 조합
 
+			// i는 부분집합. 0부터 2n-1까지 검사
 			for (int i = 0; i < (1 << N); i++) {
+				// 부분집합 바뀌면 매번 새로 검사해야 함
 				scoreSum = 0;
 				kcalSum = 0;
 
 				for (int j = 0; j < N; j++) {
+					// j번째 원소 있으면
 					if ((i & (1 << j)) > 0) {
 						scoreSum += scores[j];
 						kcalSum += kcals[j];
