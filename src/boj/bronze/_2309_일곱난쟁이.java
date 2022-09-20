@@ -17,6 +17,7 @@ public class _2309_일곱난쟁이 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int[] arr = new int[9];
+
 		int sum = 0;
 
 		// 아홉 난쟁이 키를 받음
