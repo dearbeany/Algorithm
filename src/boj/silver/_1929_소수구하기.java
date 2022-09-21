@@ -44,6 +44,7 @@ public class _1929_소수구하기 {
 				bw.write(a[i] + "\n");
 			}
 		}
+
 		bw.flush();
 		bw.close();
 	}

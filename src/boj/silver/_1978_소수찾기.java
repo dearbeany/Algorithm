@@ -35,10 +35,12 @@ public class _1978_소수찾기 {
 		System.out.println(cnt);
 	}
 
+	// 모든 약수들은 대칭형태를 이루기 때문에
+	// 굳이 끝까지 검증하지 않아도, 제곱근까지 약수 있는지 확인한다
 	public static boolean isPrime(int n) {
 		for (int i = 2; i <= (int) Math.sqrt(n); i++) {
-			if (n % i == 0) {
-				return false;
+			if (n % i == 0) { // 한 번이라도 약수 발견되면?
+				return false; // 소수 아니다
 			}
 		}
 		return true;
