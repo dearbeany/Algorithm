@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/*
+ * n개가 4개일 때 부분수열의 합을 구하는 경우의 수는 2^4=16개다.
+ */
 public class _2817_부분수열의합 {
 	static int N, K;
 	static int[] arr; // 수열
