@@ -48,9 +48,9 @@ public class _5215_햄버거다이어트_백트래킹 {
 		if (kSum > L) {
 			return;
 		}
-		if (idx == N) {
-			if (kSum <= L) {
-				res = Math.max(res, tSum);
+		if (idx == N) { // 끝까지 다 검사 했다면
+			if (kSum <= L) { // 제한칼로리 이하에서
+				res = Math.max(res, tSum); // 최대 맛의 합을 구한다
 			}
 			return;
 		}
