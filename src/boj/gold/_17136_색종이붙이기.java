@@ -40,9 +40,11 @@ public class _17136_색종이붙이기 {
 		// 1이면 가장 큰 종이부터 붙일 수 있는지 탐색한다
 		// 단, 큰 종이를 붙여도 작은 종이가 개수가 더 적은 경우가 존재한다 => 완전탐색 해야 함
 		minCnt = Integer.MAX_VALUE;
-		cnt = 0;
+		cnt = 0; // 현재까지 색종이 최소 개수
 		perm(0, 0, 0);
-		System.out.println(cnt);
+
+		minCnt = (minCnt == Integer.MAX_VALUE) ? -1 : minCnt;
+		System.out.println(minCnt);
 
 	}
 
@@ -79,22 +81,25 @@ public class _17136_색종이붙이기 {
 
 		if (j > 9) { // 맨 끝열로 가면
 			i += 1; // 행 증가
-			j = 0;
+			j = 0; // 열 초기화
 		}
 
-		if (paper[i][j] == 1) { // 1이면
-			// 종이 붙일 수 있는지? 확인
+		switch (paper[i][j]) {
+		case 0: // 0이면
+			perm(i, j + 1, cnt);
+			break;
+
+		case 1: // 1이면 종이 붙일 수 있는지 확인하자
 			for (int s = 5; s > 0; s--) {
 				if (isStickerble(i, j, s) && colorsCnt[s] > 0) { // 붙일 수 있으면 붙였다 뗐다.. dfs..
 					colorsCnt[s]--; // 종이 개수 하나 뺌
-					isSticked(i, j, s);
-					perm(i, j + 1, cnt + 1); // 붙였다!
+					isSticked(i, j, s); // 붙였다!
+					perm(i, j + 1, cnt + 1);
 					colorsCnt[s]++; // 종이 개수 하나 더함
 					isSticked(i, j, s);
 				}
 			}
-		} else { // 0이면
-			perm(i, j + 1, cnt);
+			break;
 		}
 	}
 
