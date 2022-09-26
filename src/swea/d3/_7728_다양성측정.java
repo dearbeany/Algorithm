@@ -21,8 +21,9 @@ public class _7728_다양성측정 {
 			Set<Integer> set = new HashSet<>();
 
 			String input = br.readLine(); // 다양성 체크하고 싶은 숫자
+
 			for (int i = 0; i < input.length(); i++) {
-				set.add(input.charAt(i) - '0');
+				set.add(input.charAt(i) - '0'); // 한 자릿수씩 set에 넣는다
 			}
 
 			System.out.printf("#%d %d\n", tc, set.size());
