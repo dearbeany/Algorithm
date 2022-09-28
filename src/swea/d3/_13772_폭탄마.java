@@ -45,6 +45,7 @@ public class _13772_폭탄마 {
 							if (is_in(nr, nc)) {
 								sum += map[nr][nc];
 							}
+
 						}
 					}
 					max = Math.max(max, sum);
