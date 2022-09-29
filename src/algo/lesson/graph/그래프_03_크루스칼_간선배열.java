@@ -13,7 +13,7 @@ import java.util.Scanner;
  *  
  */
 
-public class 그래프_03_크루스칼 {
+public class 그래프_03_크루스칼_간선배열 {
 	static int[] p; // 대표를 저장할 배열
 
 	public static void main(String[] args) {
@@ -78,7 +78,8 @@ public class 그래프_03_크루스칼 {
 	} // end of main
 
 	private static void union(int x, int y) {
-		p[findSet(y)] = findSet(x);
+//		p[findSet(y)] = findSet(x);
+		p[y] = x; // 이번 문제는 어차피 x, y를 대표값을 넣어주므로 해도됨.
 	}
 
 	// 원소 x의 대표를 가져온다

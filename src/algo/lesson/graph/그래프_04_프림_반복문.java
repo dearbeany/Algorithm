@@ -9,9 +9,14 @@ import java.util.Scanner;
  * - 아무거나 선택해도 되는 이유? 결과적으로 모든 정점을 선택하기 때문 
  * (2) 선택 정점과 인접 정점들 중 최소비용 간선인 정점을 선택 
  * (3) 모든 정점 선택할 때까지 (1),(2) 반복 
+ * 
+ * 정점의 개수 > 간선의 개수 -> 프림이 유리함
+ * ex) 인스타그램 : 전세계 가입자수(정점)는 많으나, 친구관계(간선)은 많지 않음. 
+ * 우선순위큐에 간선이 쌓이지만 일반적으로는 그렇지 않으므로, edge 간선배열로 이용해서 풀었다. 
+ * 
  */
 
-public class 그래프_04_프림 {
+public class 그래프_04_프림_반복문 {
 	public static void main(String[] args) {
 //		Scanner sc = new Scanner(System.in);
 		Scanner sc = new Scanner(input);
@@ -40,7 +45,7 @@ public class 그래프_04_프림 {
 		Arrays.fill(keys, Integer.MAX_VALUE);
 
 		// 임의 정점을 선택해서 돌린다. 0번부터 시작한다
-		p[0] = -1; // 0번이 시작점이다
+		p[0] = -1; // 0번이 시작점이다, 이미 0은 인덱스로 사용하기 때문에 다른 정점의 부모일 수도 있다. 따라서 -1로 초기화한다
 		keys[0] = 0; // 모든 정점의 key들은 무한대이므로 시작정점의 key는 0으로 초기화 해둠
 
 		int minCost = 0; // 최소값, 인덱스, MST 최소비용의 합
