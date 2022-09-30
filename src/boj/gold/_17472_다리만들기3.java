@@ -8,8 +8,6 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
-// 섬의개수, 단지번호 붙이기
-
 public class _17472_다리만들기3 {
 	static class Edge implements Comparable<Edge> {
 		int st, ed, w;
@@ -41,7 +39,7 @@ public class _17472_다리만들기3 {
 		}
 	}
 
-	static int n, m, island, land, vertexIdx;
+	static int n, m, island;
 	static int[][] tmp, map, imap; // imap은 섬들이 저장된 맵임
 	static int[] dist;
 	static boolean[] visited;
@@ -49,15 +47,8 @@ public class _17472_다리만들기3 {
 	static List<Edge>[] adjList;
 	static PriorityQueue<Edge> pq;
 
-	static String input = "7 8\r\n" + "0 0 0 0 0 0 1 1\r\n" + "1 1 0 0 0 0 1 1\r\n" + "1 1 0 0 0 0 0 0\r\n"
-			+ "1 1 0 0 0 1 1 0\r\n" + "0 0 0 0 0 1 1 0\r\n" + "0 0 0 0 0 0 0 0\r\n" + "1 1 1 1 1 1 1 1";
-	static String input2 = "7 8\r\n" + "1 0 0 1 1 1 0 0\r\n" + "0 0 1 0 0 0 1 1\r\n" + "0 0 1 0 0 0 1 1\r\n"
-			+ "0 0 1 1 1 0 0 0\r\n" + "0 0 0 0 0 0 0 0\r\n" + "0 1 1 1 0 0 0 0\r\n" + "1 1 1 1 1 1 0 0";
-	static String input3 = "7 7\r\n" + "1 1 1 0 1 1 1\r\n" + "1 1 1 0 1 1 1\r\n" + "1 1 1 0 1 1 1\r\n"
-			+ "0 0 0 0 0 0 0\r\n" + "1 1 1 0 1 1 1\r\n" + "1 1 1 0 1 1 1\r\n" + "1 1 1 0 1 1 1";
-
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(input3);
+		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt(); // 세로크기
 		m = sc.nextInt(); // 가로크기
 
@@ -77,26 +68,22 @@ public class _17472_다리만들기3 {
 			adjList[i] = new ArrayList<>();
 		}
 
-		print();
 		findBridge();
 
-		for (List<Edge> e : adjList) {
+//		for (List<Edge> e : adjList) {
 //			System.out.println(e);
-			for (Edge ee : e) {
+//			for (Edge ee : e) {
 //				System.out.println(ee);
-			}
-		}
-		prim(1);
+//			}
+//		}
+		prim(1); // 1번부터 시작
 
 		int res = 0;
 		for (int i = 1; i < island + 1; i++) {
 			res += dist[i];
 		}
 
-		res = (res == Integer.MAX_VALUE) ? -1 : res;
-
 		System.out.println(res);
-		System.out.println(Arrays.toString(dist));
 	}
 
 	private static void prim(int st) {
@@ -116,6 +103,8 @@ public class _17472_다리만들기3 {
 			Edge curr = pq.poll();
 
 			if (curr == null) {
+				System.out.println(-1);
+				System.exit(0);
 				return;
 			}
 

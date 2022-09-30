@@ -1,8 +1,9 @@
+package algo.lesson.graph;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class 그래프_03_간선배열 {
+public class 그래프_02_간선배열 {
 	static class Edge {
 		int start, end;
 

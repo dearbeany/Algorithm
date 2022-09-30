@@ -1,6 +1,7 @@
+package algo.lesson.graph;
 import java.util.Scanner;
 
-public class 그래프_01_인접행렬 {
+public class 그래프_02_인접행렬 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 

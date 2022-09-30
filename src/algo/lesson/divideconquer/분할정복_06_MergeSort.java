@@ -1,3 +1,4 @@
+package algo.lesson.divideconquer;
 import java.util.Arrays;
 
 public class 분할정복_06_MergeSort {
