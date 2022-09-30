@@ -1,4 +1,4 @@
-package boj.silver;
+package boj.silver.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,8 +78,7 @@ public class _2667_단지번호붙이기_BFS {
 		Collections.sort(alist); // 아파트는 오름차순 정렬
 		System.out.println(danzi);
 		for (Integer i : alist) {
-			System.out.println(i);
+//			System.out.println(i);
 		}
 	}
-
 }

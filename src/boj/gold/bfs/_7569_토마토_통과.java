@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class _7569_토마토 {
+public class _7569_토마토_통과 {
 	static class Node {
 		int h, r, c;
 

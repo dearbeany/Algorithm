@@ -6,6 +6,15 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+/*
+ * 1. 거리가 저장되는 배열 dist를 무한대로 세팅
+ * 2. 임의의 정점으로부터 시작. dist[시작점]=0. 시작노드는 PQ에 넣어주기 
+ * 3. PQ(정렬기준이 명시된)에서 시작노드를 꺼내면서 인접노드들 탐색 (단, 이미 방문한 건 패스)
+ * 4. 최단경로의 비용으로 갱신하자  
+ * - 인접노드의 dist > 현재노드의 dist + 인접노드의 값 이라면 갱신
+ * 5. 갱신한 값이 담긴 노드를 다시 큐에 넣어주기 
+ */
+
 public class 그래프_05_다잌스트라_우선순위큐 {
 	static class Node implements Comparable<Node> {
 		int v, weight;
@@ -70,7 +79,7 @@ public class 그래프_05_다잌스트라_우선순위큐 {
 				continue; // 이미 최단경로의 비용을 알고 있어
 			visited[curr.v] = true; // 선택했어.
 
-			// 현재 꺼낸 노드와 연결된 노드들을 하나씩 가져오세요.
+			// 현재 꺼낸 노드(curr)와 연결된 노드(node)들을 하나씩 가져오세요.
 			for (Node node : adjList[curr.v]) {
 				if (!visited[node.v] && dist[node.v] > dist[curr.v] + node.weight) {
 					dist[node.v] = dist[curr.v] + node.weight;
