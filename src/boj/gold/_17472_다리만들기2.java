@@ -1,104 +1,215 @@
 package boj.gold;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
-import boj.gold._17135_캐슬디펜스.Node;
-
-// 섬의개수, 단지번호 붙이기
-
 public class _17472_다리만들기2 {
-	static int n, m, island, land, vertexIdx;
-	static int[][] map, copymap;
-	static boolean[][] visited;
-	static int[][] drc = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-	static List<Node>[] list;
+	static class Edge implements Comparable<Edge> {
+		int st, ed, w;
 
-	static String input = "7 8\r\n" + "0 0 0 0 0 0 1 1\r\n" + "1 1 0 0 0 0 1 1\r\n" + "1 1 0 0 0 0 0 0\r\n"
-			+ "1 1 0 0 0 1 1 0\r\n" + "0 0 0 0 0 1 1 0\r\n" + "0 0 0 0 0 0 0 0\r\n" + "1 1 1 1 1 1 1 1";
+		Edge(int st, int ed, int w) {
+			this.st = st;
+			this.ed = ed;
+			this.w = w;
+		}
+
+		@Override
+		public String toString() {
+			return "Edge [st=" + st + ", ed=" + ed + ", w=" + w + "]";
+		}
+
+		@Override
+		public int compareTo(Edge o) {
+			return this.w - o.w;
+		}
+
+	}
+
+	static class Node {
+		int r, c;
+
+		Node(int r, int c) {
+			this.r = r;
+			this.c = c;
+		}
+	}
+
+	static int n, m, island;
+	static int[][] tmp, map, imap; // imap은 섬들이 저장된 맵임
+	static int[] dist;
+	static boolean[] visited;
+	static int[][] drc = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+	static List<Edge>[] adjList;
+	static PriorityQueue<Edge> pq;
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(input);
+		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt(); // 세로크기
 		m = sc.nextInt(); // 가로크기
 
-		// 1이고 인접해있으면 union해서 하나의 섬(집합)으로 만든다
-
+		tmp = new int[n][m];
 		map = new int[n][m];
-		copymap = new int[n][m];
+		imap = new int[n][m]; // 섬들끼리는 같은 숫자를 가진다
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				map[i][j] = sc.nextInt();
+				tmp[i][j] = map[i][j];
 			}
 		}
-		visited = new boolean[n][m];
+		groupIsland(); // 인접한 섬들끼리 번호를 그룹화 해줬다
 
-//		list = new ArrayList[island];
+		adjList = new ArrayList[island + 1];
+		for (int i = 0; i < island + 1; i++) {
+			adjList[i] = new ArrayList<>();
+		}
 
-		System.out.println(island);
-		print();
+		findBridge();
 
+//		for (List<Edge> e : adjList) {
+//			System.out.println(e);
+//			for (Edge ee : e) {
+//				System.out.println(ee);
+//			}
+//		}
+		prim(1); // 1번부터 시작
+
+		int res = 0;
+		for (int i = 1; i < island + 1; i++) {
+			res += dist[i];
+		}
+
+		System.out.println(res);
 	}
 
-	private static void bfs() {
+	private static void prim(int st) {
+		dist = new int[island + 1];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+
+		visited = new boolean[island + 1];
+		pq = new PriorityQueue<>();
+		pq.addAll(adjList[st]);
+
+		// 임의의 정점 선택
+		dist[st] = 0;
+		visited[st] = true;
+
+		int pick = 1;
+		while (pick < island) {
+			Edge curr = pq.poll();
+
+			if (curr == null) {
+				System.out.println(-1);
+				System.exit(0);
+				return;
+			}
+
+			if (!visited[curr.ed] && dist[curr.ed] > curr.w) {
+				dist[curr.ed] = curr.w;
+				visited[curr.ed] = true;
+				pq.addAll(adjList[curr.ed]);
+				pick++;
+			}
+		}
+	}
+
+	private static void findBridge() {
+		for (int r = 0; r < n; r++) {
+			for (int c = 0; c < m; c++) {
+				// 가로 다리를 먼저 찾자
+				if (imap[r][c] != 0) {
+					int nr = r;
+					int nc = c; // 다음 섬까지 도달할 거야
+					int cnt = 0;
+					while (true) {
+						nc++;
+						if (!is_in(nr, nc)) { // 범위 벗어나면 멈춰
+							break;
+						}
+						if (imap[nr][nc] != 0) { // 다른 섬을 만나면 멈춰
+							break;
+						}
+						cnt++;
+					}
+
+					if (nc != m && cnt > 1) {
+						adjList[imap[r][c]].add(new Edge(imap[r][c], imap[nr][nc], cnt));
+						adjList[imap[nr][nc]].add(new Edge(imap[nr][nc], imap[r][c], cnt));
+					}
+				}
+			}
+		}
+		for (int c = 0; c < m; c++) {
+			for (int r = 0; r < n; r++) {
+				// 세로 다리를 찾자
+				if (imap[r][c] != 0) {
+					int nr = r;
+					int nc = c;
+					int cnt = 0; // 다리 개수
+
+					while (true) {
+						nr++;
+						if (!is_in(nr, nc)) { // 범위 벗어나면 멈춰
+							break;
+						}
+						if (imap[nr][nc] != 0) { // 다른 섬을 만나면 멈춰
+							break;
+						}
+						cnt++;
+					}
+
+					if (nr != n && cnt > 1) {
+						adjList[imap[r][c]].add(new Edge(imap[r][c], imap[nr][nc], cnt));
+						adjList[imap[nr][nc]].add(new Edge(imap[nr][nc], imap[r][c], cnt));
+					}
+				}
+			}
+		}
+	}
+
+	private static void groupIsland() {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
-				if (map[i][j] == 1) {
+				if (tmp[i][j] == 1) {
 					island++;
-					land++;
+					Queue<Node> queue = new LinkedList<>();
+					queue.add(new Node(i, j)); // 첫 시작 노드를 큐에 삽입
+					tmp[i][j] = 0; // 큐에 넣었으니까 얘는 방문 OK
+					imap[i][j] = island;
 
-					Queue<Node> q = new LinkedList<>();
-					q.add(new Node(i, j));
-					map[i][j] = 0;
-					copymap[i][j] = land;
-//					visited[i][j] = true;
-//					map[i][j] = land;
-
-					while (!q.isEmpty()) {
-						Node curr = q.poll();
-						for (int d = 0; d < 4; d++) {
+					while (!queue.isEmpty()) {
+						Node curr = queue.poll(); // 큐에서 빼내서
+						for (int d = 0; d < 4; d++) { // 연결 되려면 상하좌우가 연결돼있으니까 큐에서 빼낸 n을 기준으로 인접한 사방탐색 시작
 							int nr = curr.r + drc[d][0];
 							int nc = curr.c + drc[d][1];
 
-							if (!is_in(nr, nc) || map[nr][nc] == 0) {
+							if (!is_in(nr, nc) || tmp[nr][nc] == 0) {
 								continue;
 							}
-							q.add(new Node(nr, nc));
-							map[nr][nc] = 0;
-							land++;
-//							visited[nr][nc] = true;
-//							copymap[i][j] = land;
+							queue.add(new Node(nr, nc)); // 큐에 다음 탐색할 곳들(현재 값이 1인 애들)을 넣어줘
+							tmp[nr][nc] = 0; // 다음 위치들을 큐에 넣었으니깐 얘도 방문 OK, 1->0 으로 상태 바꿔줬음
+							imap[nr][nc] = island;
 						}
 					}
 				} // end of if
-				land = 0;
-			}
-		}
+			} // end of for j
+		} // end of for i
 	}
 
 	private static boolean is_in(int r, int c) {
-		return r >= 0 && c >= 0 && r < n && c < n;
+		return r >= 0 && c >= 0 && r < n && c < m;
 	}
 
 	private static void print() {
-		for (int[] m : copymap) {
+		for (int[] m : imap) {
 			for (int mm : m) {
 				System.out.print(mm + " ");
 			}
 			System.out.println();
 		}
 	}
-
-	private static void bprint() {
-		for (boolean[] m : visited) {
-			for (boolean mm : m) {
-				int res = (mm == true) ? 1 : 0;
-				System.out.print(res + " ");
-			}
-			System.out.println();
-		}
-	}
-
 }
