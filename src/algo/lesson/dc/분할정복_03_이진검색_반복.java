@@ -1,4 +1,4 @@
-package algo.lesson.divideconquer;
+package algo.lesson.dc;
 public class 분할정복_03_이진검색_반복 {
 
 	public static void main(String[] args) {

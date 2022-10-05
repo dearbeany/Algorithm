@@ -16,12 +16,16 @@ public class _13636_연속된1의개수중최댓값찾기 {
 
 			int[] arr = new int[n];
 			String str = br.readLine();
-			for (int i = 0; i < str.length(); i++) {
+			for (int i = 0; i < n; i++) {
 				arr[i] = str.charAt(i) - '0';
 			}
 
+			int cnt = 0, max = -1;
+			for (int i = 0; i < n; i++) {
+				cnt = arr[i] == 1 ? cnt + 1 : 0;
+				max = Math.max(cnt, max);
+			}
+			System.out.printf("#%d %d\n", tc, max);
 		}
-
 	}
-
 }

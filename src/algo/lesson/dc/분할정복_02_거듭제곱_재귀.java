@@ -1,4 +1,4 @@
-package algo.lesson.divideconquer;
+package algo.lesson.dc;
 
 public class 분할정복_02_거듭제곱_재귀 {
 	

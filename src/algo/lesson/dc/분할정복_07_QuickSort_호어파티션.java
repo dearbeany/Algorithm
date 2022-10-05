@@ -1,4 +1,4 @@
-package algo.lesson.divideconquer;
+package algo.lesson.dc;
 import java.util.Arrays;
 
 public class 분할정복_07_QuickSort_호어파티션 {

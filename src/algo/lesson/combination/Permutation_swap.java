@@ -1,4 +1,4 @@
-package algo.lesson.comb;
+package algo.lesson.combination;
 import java.util.Arrays;
 
 public class Permutation_swap {
