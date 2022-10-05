@@ -23,7 +23,6 @@ public class _1149_RGB거리 {
 			}
 		}
 
-		int min = Integer.MAX_VALUE;
 		for (int i = 1; i < n; i++) {
 			map[i][0] = Math.min(map[i - 1][1], map[i - 1][2]) + map[i][0];
 			map[i][1] = Math.min(map[i - 1][0], map[i - 1][2]) + map[i][1];
