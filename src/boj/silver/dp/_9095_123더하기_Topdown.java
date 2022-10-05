@@ -2,7 +2,7 @@ package boj.silver.dp;
 
 import java.util.Scanner;
 
-public class _9095_123더하기 {
+public class _9095_123더하기_Topdown {
 
 	static int n; // 만들어야 하는 합
 	static int[] dp = new int[11]; // 인덱스에 해당하는 값을 1,2,3으로 만든 방법의 수가 저장
