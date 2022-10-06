@@ -23,17 +23,17 @@ public class _2579_계단오르기 {
 		for (int i = 1; i < n + 1; i++) {
 			stair[i] = sc.nextInt();
 		}
-		int[] memo = new int[n + 1]; // n번의 계단까지의 최대점수값을 저장
+		int[] dp = new int[n + 1]; // n번의 계단까지의 최대점수값을 저장
 
-		memo[1] = stair[1];
+		dp[1] = stair[1];
 		if (n >= 2) {
-			memo[2] = stair[1] + stair[2];
+			dp[2] = stair[1] + stair[2];
 		}
 
 		for (int i = 3; i <= n; i++) {
-			memo[i] = Math.max(memo[i - 3] + stair[i - 1] + stair[i], memo[i - 2] + stair[i]);
+			dp[i] = Math.max(dp[i - 3] + stair[i - 1] + stair[i], dp[i - 2] + stair[i]);
 		}
 
-		System.out.println(memo[n]);
+		System.out.println(dp[n]);
 	}
 }

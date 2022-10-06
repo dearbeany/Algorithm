@@ -1,4 +1,4 @@
-package boj.gold.bfs;
+package boj.gold.graph;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package boj.gold;
+package boj.gold.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;

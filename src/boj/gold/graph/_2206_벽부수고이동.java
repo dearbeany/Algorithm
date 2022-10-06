@@ -1,4 +1,4 @@
-package boj.gold.bfs;
+package boj.gold.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 // 부수고 온 자리와 부수지 않고 온 자리가 다르다 visited배열 2개 있어야 함
-public class _2206_벽부수고이동_통과 {
+public class _2206_벽부수고이동 {
 	static class Node {
 		int r, c, dist;
 		boolean crush;
