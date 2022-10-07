@@ -46,7 +46,7 @@ public class _1012_유기농배추 {
 			q = new ArrayDeque<>();
 			for (int i = 0; i < m; i++) {
 				for (int j = 0; j < n; j++) {
-					if (map[i][j] == 1 && !visited[i][j]) {
+					if (map[i][j] == 1 && !visited[i][j]) { // 1이고 방문하지 않았을 때 카운트
 						bfs(i, j);
 						cnt++;
 					}
@@ -79,7 +79,6 @@ public class _1012_유기농배추 {
 				visited[nr][nc] = true;
 			}
 		}
-//		cnt++;
 	}
 
 	private static boolean is_in(int r, int c) {
