@@ -2,7 +2,7 @@ package boj.bronze;
 
 import java.util.Scanner;
 
-public class _13300_방배정 {
+public class _13300_방배정2 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
@@ -23,10 +23,10 @@ public class _13300_방배정 {
 				if (map[i][j] == 0) {
 					continue;
 				}
-				if (map[i][j] > k) {
-					room += Math.ceil((double) map[i][j] / k);
-				} else {
-					room++;
+
+				room += map[i][j] / k; // 나눈 몫만큼 더해주고
+				if (map[i][j] % k != 0) { // 나눠떨어지지 않으면
+					room++; // 하나 더 필요
 				}
 			}
 		}
