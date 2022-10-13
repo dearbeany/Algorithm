@@ -1,8 +1,8 @@
-package im;
+package swea.d2;
 
 import java.util.Scanner;
 
-public class _1964_스도쿠검증 {
+public class _1974_스도쿠검증 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
