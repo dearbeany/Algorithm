@@ -8,77 +8,72 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class _2178_미로탐색2 {
-
 	static class Node {
-		int r, c, dist;
+		int r, c, d;
 
-		Node(int r, int c, int dist) {
+		Node(int r, int c, int d) {
 			this.r = r;
 			this.c = c;
-			this.dist = dist;
+			this.d = d;
 		}
 	}
 
-	static int N, M;
-	static int[][] maze;
+	static int n, m;
+	static int[][] map;
 	static boolean[][] visited;
-	static int[] dr = { 1, -1, 0, 0 };
-	static int[] dc = { 0, 0, -1, 1 };
+	static Queue<Node> q;
+	static int[][] drc = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		// N개의 줄 M개의 정수
-		// 1 이동 가능, 0 이동 불가
-		// (1,1) 출발 (N,M)도착까지 최소의 칸 수
-		// (0,0)~(N-1,M-1)
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		map = new int[n][m];
+		visited = new boolean[n][m];
 
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-
-		maze = new int[N][M];
-		visited = new boolean[N][M];
-
-		Queue<Node> queue = new LinkedList<>();
-
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < n; i++) {
 			String str = br.readLine();
-			for (int j = 0; j < M; j++) {
-				maze[i][j] = str.charAt(j) - '0';
+			for (int j = 0; j < m; j++) {
+				map[i][j] = str.charAt(j) - '0';
 			}
 		}
 
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				if (i == 0 && j == 0) {
-					queue.add(new Node(i, j, 1)); // 출발점
-					visited[i][j] = true;
-				}
-			}
-		}
+		// (1,1) 출발해 (n,m)도착할 때 최단거리?
+		// (0,0) ~ (n-1, m-1)
+		bfs(0, 0, 1);
 
-		while (!queue.isEmpty()) {
-			Node n = queue.poll(); // 큐에 있는 걸 꺼내서 인접한 거 탐색
-
-			for (int i = 0; i < 4; i++) {
-				int nr = n.r + dr[i];
-				int nc = n.c + dc[i];
-				int ndist = n.dist + 1;
-
-				if (nr < 0 || nc < 0 || nr >= N || nc >= M || visited[nr][nc] || maze[nr][nc] == 0) {
-					continue;
-				}
-
-				if (nr == N - 1 & nc == M - 1) { // 도착점이면 끝내야지
-					System.out.println(ndist);
-					return;
-				}
-
-				queue.add(new Node(nr, nc, ndist));
-				visited[nr][nc] = true;
-			}
-		}
 	}
 
+	private static void bfs(int r, int c, int d) {
+		q = new LinkedList<>();
+		q.add(new Node(r, c, d));
+		visited[r][c] = true;
+
+		while (!q.isEmpty()) {
+			Node curr = q.poll();
+
+			if (curr.r == n - 1 && curr.c == m - 1) {
+				System.out.println(curr.d);
+				return;
+			}
+
+			for (int i = 0; i < 4; i++) {
+				int nr = curr.r + drc[i][0];
+				int nc = curr.c + drc[i][1];
+
+				// 맵 안에 있고, 1이고, 방문 안 했을 때 이동
+				if (is_in(nr, nc) && map[nr][nc] == 1 && !visited[nr][nc]) {
+					q.add(new Node(nr, nc, curr.d + 1));
+					visited[nr][nc] = true;
+				}
+			}
+		}
+
+	}
+
+	private static boolean is_in(int r, int c) {
+		return r >= 0 && c >= 0 && r < n && c < m;
+	}
 }

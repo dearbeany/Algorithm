@@ -17,9 +17,9 @@ public class _25756_방어율무시계산 {
 
 		for (int i = 0; i < n; i++) {
 			v = 1 - (1 - v) * (1 - potion[i] * 0.01);
-//			System.out.println(v);
+			System.out.println(v * 100);
 
-			System.out.println(Math.round(v * 1000000) / 10000.0);
+//			System.out.println(Math.round(v * 1000000) / 10000.0);
 		}
 	}
 }

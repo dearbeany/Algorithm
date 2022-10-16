@@ -51,19 +51,6 @@ public class _4963_섬의개수_DFS {
 		} // end of while
 	} // end of main
 
-//	public static void dfs(int r, int c) {
-//		map[r][c] = 0; // 방문체크
-//
-//		for (int d = 0; d < 8; d++) {
-//			int nr = r + dr[d];
-//			int nc = c + dc[d];
-//
-//			if (nr < 0 || nc < 0 || nr >= h || nc >= w || map[nr][nc] == 0) {
-//				continue;
-//			}
-//			dfs(nr, nc);
-//		}
-//	}
 	public static void dfs(int r, int c) {
 		visited[r][c] = true; // 방문체크
 
