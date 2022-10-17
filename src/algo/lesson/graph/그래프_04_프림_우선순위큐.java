@@ -5,6 +5,15 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+/* 우선순위 큐를 이용한 프림
+ * (1) 임의의 정점 하나 선택해 pq 에 넣는다
+ * (2) pq에서 정점 하나 꺼내기 (pq의해 비용 가장 작은 정점이 나온다)
+ * (3) pq에서 꺼낸 정점이 이미 visited라면, 다른 거 꺼내기 
+ * (4) pq에서 꺼낸 정점이 아직 visited 아니면, 방문처리 후 정점의 비용 더하기
+ * (5) 4의 정점과 인접한 정점들 중 방문하지 않은 정점들 pq에 넣기 
+ * (6) pq 빌 때까지 2~5 반복 
+ * 
+ */
 public class 그래프_04_프림_우선순위큐 {
 	static class Edge implements Comparable<Edge> {
 		int st, ed, cost;
@@ -53,7 +62,8 @@ public class 그래프_04_프림_우선순위큐 {
 		int pick = 1; // 확보한 정점의 개수. 0번 정점을 하나 뽑았다
 		int minCost = 0; // 최소비용
 
-		while (pick != V) {
+		while (!pq.isEmpty()) {
+//		while (pick != V) {
 			Edge edge = pq.poll(); // 우선순위큐에서 정렬기준을 정해줬으므로 cost 가장 작은 게 뽑힌다
 			if (visited[edge.ed]) { // 이미 뽑은 정점이었다면 넘겨
 				continue;
