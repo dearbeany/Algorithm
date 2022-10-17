@@ -78,7 +78,7 @@ public class 그래프_03_크루스칼_간선배열 {
 	} // end of main
 
 	private static void union(int x, int y) {
-//		p[findSet(y)] = findSet(x);
+		p[findSet(y)] = findSet(x);
 		p[y] = x; // 이번 문제는 어차피 x, y를 대표값을 넣어주므로 해도됨.
 	}
 
