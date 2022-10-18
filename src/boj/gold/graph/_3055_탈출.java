@@ -14,15 +14,21 @@ import java.util.StringTokenizer;
  */
 public class _3055_탈출 {
 	static class Node {
-		int r, c;
+		int r, c, t;
 
 		Node(int r, int c) {
 			this.r = r;
 			this.c = c;
 		}
+
+		Node(int r, int c, int t) {
+			this.r = r;
+			this.c = c;
+			this.t = t;
+		}
 	}
 
-	static int n, m, time;
+	static int n, m;
 	static char[][] map;
 	static boolean[][] visited, wVisited;
 	static int[][] drc = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
@@ -47,11 +53,10 @@ public class _3055_탈출 {
 					wq.add(new Node(i, j));
 				}
 				if (map[i][j] == 'S') {
-					q.add(new Node(i, j));
+					q.add(new Node(i, j, 0));
 				}
 			}
 		}
-		time = 0;
 		bfs();
 
 	}
@@ -60,47 +65,46 @@ public class _3055_탈출 {
 		wVisited = new boolean[n][m]; // 물
 		visited = new boolean[n][m]; // 고슴이
 
-		int size = wq.size();
+		while (!q.isEmpty()) {
+			int size = wq.size();
 
-		for (int i = 0; i < size; i++) {
-			Node w = wq.poll();
+			for (int i = 0; i < size; i++) {
+				Node w = wq.poll();
 
-			for (int d = 0; d < 4; d++) {
-				int nr = w.r + drc[d][0];
-				int nc = w.c + drc[d][1];
+				for (int d = 0; d < 4; d++) {
+					int nr = w.r + drc[d][0];
+					int nc = w.c + drc[d][1];
 
-				if (is_in(nr, nc) && map[nr][nc] == '.' && !wVisited[nr][nc]) {
-					wq.add(new Node(nr, nc));
-					wVisited[nr][nc] = true;
+					if (is_in(nr, nc) && map[nr][nc] == '.' && !wVisited[nr][nc]) {
+						wq.add(new Node(nr, nc));
+						map[nr][nc] = '*';
+						wVisited[nr][nc] = true;
+					}
 				}
 			}
-		}
 
-		int qsize = q.size(); // 고슴도치
-		if (qsize == 0) {
-			return;
-		}
+			int qsize = q.size(); // 고슴도치
 
-		for (int i = 0; i < qsize; i++) {
-			Node curr = q.poll();
+			for (int i = 0; i < qsize; i++) {
+				Node curr = q.poll();
 
-			// 굴 도착하면 멈춰
-			if (map[curr.r][curr.c] == 'D') {
-				System.out.println(time);
-				return;
-			}
-
-			for (int d = 0; d < 4; d++) {
-				int nr = curr.r + drc[d][0];
-				int nc = curr.c + drc[d][1];
-
-				// 범위 벗어나고, 돌이고, 물이면 넘겨
-				if (!is_in(nr, nc) || map[nr][nc] == 'X' || map[nr][nc] == '*' || visited[nr][nc]) {
-					continue;
+				// 굴 도착하면 멈춰
+				if (map[curr.r][curr.c] == 'D') {
+					System.out.println(curr.t);
+					return;
 				}
-				q.add(new Node(nr, nc));
-				visited[nr][nc] = true;
-				time++;
+
+				for (int d = 0; d < 4; d++) {
+					int nr = curr.r + drc[d][0];
+					int nc = curr.c + drc[d][1];
+
+					// 범위 벗어나고, 돌이고, 물이면 넘겨
+					if (!is_in(nr, nc) || map[nr][nc] == 'X' || map[nr][nc] == '*' || visited[nr][nc]) {
+						continue;
+					}
+					q.add(new Node(nr, nc, curr.t + 1));
+					visited[nr][nc] = true;
+				}
 			}
 		}
 	}

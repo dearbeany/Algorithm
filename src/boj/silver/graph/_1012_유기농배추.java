@@ -6,12 +6,18 @@ import java.util.Scanner;
 
 public class _1012_유기농배추 {
 	static class Node {
-		int r, c;
+		int r, c, t;
 
 		public Node(int r, int c) {
 			super();
 			this.r = r;
 			this.c = c;
+		}
+		public Node(int r, int c, int t) {
+			super();
+			this.r = r;
+			this.c = c;
+			this.t =t;
 		}
 
 		@Override
