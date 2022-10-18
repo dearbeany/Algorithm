@@ -28,7 +28,7 @@ public class _3055_탈출 {
 		}
 	}
 
-	static int n, m;
+	static int n, m, res;
 	static char[][] map;
 	static boolean[][] visited, wVisited;
 	static int[][] drc = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
@@ -57,7 +57,13 @@ public class _3055_탈출 {
 				}
 			}
 		}
+		res = 0;
 		bfs();
+		if (res == 0) {
+			System.out.println("KAKTUS");
+		} else {
+			System.out.println(res);
+		}
 
 	}
 
@@ -65,10 +71,10 @@ public class _3055_탈출 {
 		wVisited = new boolean[n][m]; // 물
 		visited = new boolean[n][m]; // 고슴이
 
-		while (!q.isEmpty()) {
+		while (!q.isEmpty()) { // 고슴이가 이동할 수 있을 때까지 반복
 			int size = wq.size();
 
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < size; i++) { // 현재 큐에 있는 노드개수만 돌리자. 같은 레벨끼리만 탐색
 				Node w = wq.poll();
 
 				for (int d = 0; d < 4; d++) {
@@ -77,7 +83,7 @@ public class _3055_탈출 {
 
 					if (is_in(nr, nc) && map[nr][nc] == '.' && !wVisited[nr][nc]) {
 						wq.add(new Node(nr, nc));
-						map[nr][nc] = '*';
+						map[nr][nc] = '*'; // 물 확장됐으니까 바꿔줘야지 고슴이 못 가게
 						wVisited[nr][nc] = true;
 					}
 				}
@@ -90,7 +96,7 @@ public class _3055_탈출 {
 
 				// 굴 도착하면 멈춰
 				if (map[curr.r][curr.c] == 'D') {
-					System.out.println(curr.t);
+					res = curr.t;
 					return;
 				}
 
