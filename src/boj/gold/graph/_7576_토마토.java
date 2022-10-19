@@ -3,78 +3,114 @@ package boj.gold.graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+/*
+ * 며칠이 지나면 토마토가 모두 익는지 최소일수?
+ * 상자에는 토마토가 들어있지 않을 수도 
+ */
 public class _7576_토마토 {
 	static class Node {
-		int r, c, day;
+		int r, c, t;
 
-		Node(int r, int c, int day) {
+		Node(int r, int c, int t) {
 			this.r = r;
 			this.c = c;
-			this.day = day;
+			this.t = t;
 		}
+
+		@Override
+		public String toString() {
+			return "Node [r=" + r + ", c=" + c + ", t=" + t + "]";
+		}
+
 	}
 
-	static int[] dr = { 1, -1, 0, 0 };
-	static int[] dc = { 0, 0, -1, 1 };
+	static int n, m, res; // 세로 가로
+	static int[][] map;
+	static int[][] drc = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+	static boolean[][] visited;
+	static Queue<Node> q;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		int M = Integer.parseInt(st.nextToken()); // 세로 칸의 수
-		int N = Integer.parseInt(st.nextToken()); // 가로 칸의 수
+		m = Integer.parseInt(st.nextToken()); // 열의 개수
+		n = Integer.parseInt(st.nextToken()); // 행의 개수
 
-		int[][] tomato = new int[N][M];
-		boolean[][] visited = new boolean[N][M];
+		q = new ArrayDeque<>();
+		map = new int[n][m];
+		visited = new boolean[n][m];
 
-		for (int i = 0; i < N; i++) {
+		// 1 = 익토, 0 = 안 익토, -1 = 빈칸
+		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			for (int j = 0; j < M; j++) {
-				tomato[i][j] = Integer.parseInt(st.nextToken());
-			}
-		}
-
-		// 1=익은토마토, 0=익지 않은 토마토, -1=빈 칸
-		// 토마토가 익기까지 최소날짜?
-
-		Queue<Node> queue = new LinkedList<>();
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				if (tomato[i][j] == 1) { // 익은 토마토들은 다 넣자
-					queue.add(new Node(i, j, 0));
+			for (int j = 0; j < m; j++) {
+				map[i][j] = Integer.parseInt(st.nextToken());
+				if (map[i][j] == 1) {
+					q.add(new Node(i, j, 0));
 					visited[i][j] = true;
 				}
 			}
 		}
+		res = 0;
+		bfs();
+//		print();
 
-		// 이미 토마토들이 다 익었으면 0
-		// 토마토가 모두 익지는 못하면 -1
+		// 모든 토마토가 이미 익어있으면 0 -> res도 0이다
+		// 토마토가 익지 못하는 상황이면 -1 -> 0이 하나라도 있다
+		res = isImpossible() ? -1 : res;
+		System.out.println(res);
+	}
 
-		int minDay = Integer.MAX_VALUE;
-
-		while (!queue.isEmpty()) {
-			Node n = queue.poll();
-
-			for (int i = 0; i < 4; i++) {
-				int nr = n.r + dr[i];
-				int nc = n.c + dc[i];
-				int nday = n.day + 1;
-
-				if (nr < 0 || nc < 0 || nr >= N || nc >= M || visited[nr][nc] || tomato[nr][nc] == 1
-						|| tomato[nr][nc] == -1) {
-					continue;
+	// 익지 못한 토마토 0 가 하나라도 있으면
+	private static boolean isImpossible() {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (map[i][j] == 0) {
+					return true;
 				}
-
-				minDay = Math.min(nday, minDay);
-
-				queue.add(new Node(nr, nc, nday));
-				visited[nr][nc] = true;
 			}
+		}
+		return false;
+	}
+
+	private static void print() {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				System.out.print(map[i][j] + " ");
+			}
+			System.out.println();
 		}
 	}
 
+	private static void bfs() {
+		while (!q.isEmpty()) {
+			Node curr = q.poll();
+
+			if (curr.t > res) {
+				res = curr.t;
+			}
+			for (int i = 0; i < 4; i++) {
+				int nr = curr.r + drc[i][0];
+				int nc = curr.c + drc[i][1];
+
+				// 범위 안에 있고, 0이면 익히기,
+				if (is_in(nr, nc) && map[nr][nc] == 0) {
+					map[nr][nc] = 1; // 익히고
+					q.add(new Node(nr, nc, curr.t + 1));
+					visited[nr][nc] = true;
+				}
+			}
+		}
+
+	}
+
+	private static boolean is_in(int r, int c) {
+		// TODO Auto-generated method stub
+		return r >= 0 && c >= 0 && r < n && c < m;
+	}
 }
