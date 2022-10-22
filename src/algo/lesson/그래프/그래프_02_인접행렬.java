@@ -1,4 +1,4 @@
-package algo.lesson.graph;
+package algo.lesson.그래프;
 import java.util.Scanner;
 
 public class 그래프_02_인접행렬 {

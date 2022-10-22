@@ -1,4 +1,4 @@
-package algo.lesson.graph;
+package algo.lesson.그래프;
 
 //빌리지 손가락
 public class 그래프_01_DFS {

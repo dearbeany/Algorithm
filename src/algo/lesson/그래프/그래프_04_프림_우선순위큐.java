@@ -1,4 +1,4 @@
-package algo.lesson.graph;
+package algo.lesson.그래프;
 
 import java.util.ArrayList;
 import java.util.List;

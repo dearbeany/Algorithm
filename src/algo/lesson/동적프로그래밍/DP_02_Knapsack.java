@@ -1,4 +1,4 @@
-package algo.lesson.dp;
+package algo.lesson.동적프로그래밍;
 
 import java.util.Scanner;
 

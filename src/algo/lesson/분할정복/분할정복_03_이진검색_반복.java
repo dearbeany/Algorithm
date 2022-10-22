@@ -1,4 +1,4 @@
-package algo.lesson.dc;
+package algo.lesson.분할정복;
 public class 분할정복_03_이진검색_반복 {
 
 	public static void main(String[] args) {

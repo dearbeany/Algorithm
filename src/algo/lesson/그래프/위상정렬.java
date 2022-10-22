@@ -1,4 +1,4 @@
-package algo.lesson.dp;
+package algo.lesson.그래프;
 
 import java.util.LinkedList;
 import java.util.Queue;

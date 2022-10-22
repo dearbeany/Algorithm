@@ -1,4 +1,4 @@
-package algo.lesson.dc;
+package algo.lesson.분할정복;
 
 public class 분할정복_02_거듭제곱_재귀 {
 	

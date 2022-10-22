@@ -1,4 +1,4 @@
-package algo.lesson.dc;
+package algo.lesson.분할정복;
 import java.util.Arrays;
 
 public class 분할정복_08_QuickSort_로무토파티션 {
