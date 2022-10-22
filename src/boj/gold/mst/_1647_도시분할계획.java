@@ -9,7 +9,9 @@ import java.util.StringTokenizer;
 
 /*
  * 마을을 2개로 분리하려는데, 길의 유지비 합을 최소로 해야한다. 
- * 가중치 가장 높은 정점을 더해주지 않으면 된다 
+ * 간선 하나만 잘라내면 마을 2개로 분리되니까 
+ * 가중치 가장 높은 정점을 더해주지 않으면 알아서 분리된다. 
+ * 
  */
 public class _1647_도시분할계획 {
 	static class Edge implements Comparable<Edge> {
