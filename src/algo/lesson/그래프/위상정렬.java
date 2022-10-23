@@ -4,6 +4,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/*
+ * (1) indegree 0인 모든 노드를 큐에 add
+ * (2) 큐가 empty 까지 수행 
+ *   - 큐에서 poll 해서 해당 노드에서 나가는 간선을 제거 
+ *   - 새롭게 indegree 0이 된 노드 큐에 add 
+ * 
+ * 결과 : 큐에서 꺼내진 순서가 위상정렬 수행한 결과 
+ */
 public class 위상정렬 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
