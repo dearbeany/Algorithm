@@ -65,7 +65,7 @@ public class _14567_선수과목 {
 		}
 
 		for (int i = 1; i < V + 1; i++) {
-			System.out.print(ans[i] + " ");
+//			System.out.print(ans[i] + " ");
 		}
 	}
 }
