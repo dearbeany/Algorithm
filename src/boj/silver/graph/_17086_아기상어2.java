@@ -1,4 +1,4 @@
-package boj.silver;
+package boj.silver.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
