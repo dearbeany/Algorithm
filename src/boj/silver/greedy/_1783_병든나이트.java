@@ -15,10 +15,7 @@ public class _1783_병든나이트 {
 		n = sc.nextInt();
 		m = sc.nextInt();
 
-		int[][] map = new int[n][m];
-
 		int cnt = 1; // 방문칸 개수
-		int maxCnt = -1; // 방문할 수 있는 칸의 개수 중 최대값
 
 		// n == 1 면 cnt ==1
 		// n == 2 면 (-1,2) (1,2)로 왔다갔다 이동 m=1,3,5,7까지 갔을 때 최대 3이동
