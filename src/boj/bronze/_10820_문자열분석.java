@@ -14,14 +14,11 @@ public class _10820_문자열분석 {
 		// 소문자는 97부터 122까지
 		// 대문자는 65부터 90까지
 		// 공백은 32
-		String[] arr = new String[101];
-		for (int i = 0; i < 101; i++) {
-			int small = 0, big = 0, number = 0, empty = 0;
-			String str = br.readLine();
+		String str = null;
 
-			if (str.isEmpty()) {
-				break;
-			}
+		while ((str = br.readLine()) != null) {
+			int small = 0, big = 0, number = 0, empty = 0;
+
 			for (int j = 0; j < str.length(); j++) {
 				int num = str.charAt(j);
 
