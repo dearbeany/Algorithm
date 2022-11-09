@@ -10,21 +10,36 @@ public class _4358_생태학 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		String name = null;
+		Map<String, Integer> map = new TreeMap<>(); // 나무 종류, 개수
 
-		Map<String, Integer> map = new TreeMap<>();
+		int total = 0;
+//		String name = br.readLine(); // 나무 종이름
+		String name;
 
 		while ((name = br.readLine()) != null) {
-			// 아무것도 없으면 1 넣고
-			// 이미 들어있으면 1 더해서 넣고
+			total++;
+			int value = map.getOrDefault(name, -1); // name 있으면 키에 해당하는 값, 없으면 -1
 
-			if (map.containsKey(name)) {
-				int value = map.get(name);
-				map.put(name, ++value);
-			} else {
+			if (value == -1) {
 				map.put(name, 1);
+			} else {
+				int newVal = map.get(name);
+				map.put(name, newVal + 1);
 			}
+
+//			name = br.readLine();
+//			if (name == null || name.length() == 0) {
+//				break;
+//			}
 		}
-		System.out.println(map);
+
+		for (String key : map.keySet()) {
+			double value = map.get(key);
+			String ratio = String.format("%.4f", value / total * 100);
+			System.out.println(key + " " + ratio);
+		}
+
+//		System.out.println(map);
+//		System.out.println(total);
 	}
 }
