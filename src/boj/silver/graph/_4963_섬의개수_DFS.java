@@ -58,12 +58,16 @@ public class _4963_섬의개수_DFS {
 			int nr = r + dr[d];
 			int nc = c + dc[d];
 
-			if (nr < 0 || nc < 0 || nr >= h || nc >= w || map[nr][nc] == 0) {
-				continue;
-			}
-			if (map[nr][nc] == 1 && !visited[nr][nc]) { // 다음 탐색할 곳이 땅이고, 방문하지 않았다면
+//			if (nr < 0 || nc < 0 || nr >= h || nc >= w || map[nr][nc] == 0) {
+//				continue;
+//			}
+			if (is_in(nr, nc) && map[nr][nc] == 1 && !visited[nr][nc]) { // 다음 탐색할 곳이 땅이고, 방문하지 않았다면
 				dfs(nr, nc);
 			}
 		}
+	}
+
+	private static boolean is_in(int r, int c) {
+		return r >= 0 && c >= 0 && r < h && c < w;
 	}
 }
