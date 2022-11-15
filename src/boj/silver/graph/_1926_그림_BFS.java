@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
  * bfs를 이용해 1이 상하좌우로 연결된 그림의 개수와
  * 그 그림 중 가장 최대 넓이? 
  */
-public class _1926_그림 {
+public class _1926_그림_BFS {
 	static class Node {
 		int r, c;
 
